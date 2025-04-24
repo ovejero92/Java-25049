@@ -1,5 +1,4 @@
-package com.techlab.inicio;
-import java.util.Scanner;
+package com.techlab.inicio.clase2;
 
 public class clase2 {
     public static void main(String[] args) {
@@ -42,7 +41,7 @@ public class clase2 {
 
         i = i + 2;
 
-        System.out.println(contador++);
+
 
 
     }
