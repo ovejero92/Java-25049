@@ -16,6 +16,10 @@ public class ProductoUtils {
         return sb.toString().trim(); // Quita el último espacio y retorna
     }
 
+    public static int generarNumeroEnteroAleatorio(int minimo, int maximo) {
+        return (int)Math.floor(Math.random() * (minimo -(maximo+1))+(maximo+1));
+    }
+
     public static void main(String[] args) {
         String nombreFormateado = formatearNombreProducto("cafe starbucks");
         System.out.println("Producto formateado: " + nombreFormateado);

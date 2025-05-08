@@ -1,10 +1,11 @@
-package com.techlab.inicio.clase3;
+package com.techlab.inicio.clases.clase3;
 import java.util.Arrays;
 
 public class ejemplos {
     public static void main(String[] args) {
         String nombre = "gustavo";
         String apellido = "ovejero";
+
 
         nombre = nombre.toUpperCase().charAt(0) + nombre.substring(1);
         apellido = apellido.toUpperCase().charAt(0) + apellido.substring(1);

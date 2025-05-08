@@ -1,4 +1,4 @@
-package com.techlab.inicio.clase3;
+package com.techlab.inicio.clases.clase3;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

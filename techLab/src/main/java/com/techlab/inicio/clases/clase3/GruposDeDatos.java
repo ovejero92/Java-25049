@@ -1,4 +1,4 @@
-package com.techlab.inicio.clase3;
+package com.techlab.inicio.clases.clase3;
 
 public class GruposDeDatos {
     public static void main(String[] args) {
