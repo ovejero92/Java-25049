@@ -1,4 +1,4 @@
-package com.techlab.inicio;
+package com.techlab.inicio.clases.clase4;
 import java.util.Scanner;
 
 public class ejemplo {

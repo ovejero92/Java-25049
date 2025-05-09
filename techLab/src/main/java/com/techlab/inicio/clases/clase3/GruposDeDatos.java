@@ -4,7 +4,6 @@ public class GruposDeDatos {
     public static void main(String[] args) {
         String textoEjemplo = "mensaje en formato String 123";
 
-
         // 1. length() -> devuelve la cantidad de datos que hay en el array String
         System.out.println("length(): " + textoEjemplo.length());
 
