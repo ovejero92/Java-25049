@@ -21,7 +21,8 @@ public class ProductoUtils {
     }
 
     public static void main(String[] args) {
-        String nombreFormateado = formatearNombreProducto("cafe starbucks");
-        System.out.println("Producto formateado: " + nombreFormateado);
+        int numero = generarNumeroEnteroAleatorio(5, 10);
+        System.out.println(numero);
+
     }
 }
