@@ -1,4 +1,6 @@
 package com.techlab.inicio.clases.clase5;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 public class Producto {
     // descripcion ( atributos)
@@ -15,8 +17,6 @@ public class Producto {
         this.nombre = nombre;
         this.precio = precio;
     }
-
-
 
     //funcionamiento ( metodos)
     void descontarStock(){
@@ -45,6 +45,20 @@ public class Producto {
 
     }
 
+    String separadorDeMiles(double numero) {
+        DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+        simbolo.setGroupingSeparator('.');
 
+        DecimalFormat formato = new DecimalFormat("#,##0.00",simbolo);
+
+        return formato.format(numero);
+    }
+
+    void reporteProducto() {
+        System.out.println("Datos del producto");
+        System.out.println("Nombre: " + capitalize());
+        System.out.println("Precio: $" + separadorDeMiles(precio));
+        System.out.println("Stock:" + stock);
+    }
 
 }
