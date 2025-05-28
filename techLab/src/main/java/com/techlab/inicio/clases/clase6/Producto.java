@@ -29,17 +29,24 @@ public class Producto {
 
 
     String getNombre() {
-      return nombre;
+      return Utils.capitalize(nombre);
     }
 
     void print(){
         System.out.println("********************");
-        System.out.println("*Nombre: " + this.nombre);
+        System.out.println("*Nombre: " + Utils.capitalize(this.nombre));
         System.out.println("*Precio: "+ Utils.separadorDeMiles(this.precio));
         System.out.println("*Stock: " + this.stock);
+        System.out.println("*Cantidad: " + this.cantidad);
         System.out.println("********************");
     }
-    void agregarDescuento(double descuento){this.descuento = descuento;}
+    void agregarDescuento(double descuento){
+      if(this.descuento >= 50){
+          System.out.println("no podes aplicar mas del 50%");
+      } else {
+          this.descuento = descuento;
+      }
+    }
     void agregarCantidad(int cantidad){this.cantidad += cantidad;}
     boolean contieneNombre(String busqueda){
       return this.nombre.contains(busqueda);
