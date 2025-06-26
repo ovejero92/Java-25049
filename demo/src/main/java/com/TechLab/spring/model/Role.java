@@ -3,23 +3,16 @@ package com.TechLab.spring.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.List;
+import lombok.Setter;
 
 @Entity
-@Getter
 @AllArgsConstructor
-@Table(name = "users")
-public class Usuario {
-
+@Getter
+@Setter
+public class Role {
     @Id
     @GeneratedValue
     private Long id;
+    private String name;
 
-    private String username;
-    private String password;
-
-    @ManyToMany
-    private List<Role> roles;
-    
 }
