@@ -10,31 +10,31 @@ import java.util.List;
 @RequestMapping("/producto")
 public class ProductController {
 
+    private  ProductoService productoService;
 
-
-   @GetMapping("/list")
+    @GetMapping("/list")
     public List<Producto> listarProductos() {
-       return ProductoService.listarProductos();
-   }
+        return productoService.listarProductos();
+    }
 
     @PostMapping("/")
     public String crearProducto(@RequestBody Producto producto){
-        return "creando producto..." + producto;
+        return productoService.crearProducto(producto);
     }
 
-   @GetMapping("/find/{id}")
-    public String buscarProductos(@PathVariable Long id) {
-       return "buscando ..." + id;
-   }
+    @GetMapping("/find/{id}")
+    public Producto buscarProductos(@PathVariable Long id) {
+        return productoService.buscarPorId(id);
+    }
 
-   //   /buscar?nombre=mouse
-   @GetMapping("/buscar")
-   public String buscarProducto(@RequestParam String nombre, @RequestParam(required = false, defaultValue = "asc") String orden ) {
-       return "buscando... nombre: " + nombre + " orden: " + orden;
-   }
+    //   /buscar?nombre=mouse
+    @GetMapping("/buscar")
+    public String buscarProducto(@RequestParam String nombre, @RequestParam(required = false, defaultValue = "asc") String orden ) {
+        return "buscando... nombre: " + nombre + " orden: " + orden;
+    }
 
 
-   // ../find/342 ->
+    // ../find/342 ->
     // ../find/{id}
 
 

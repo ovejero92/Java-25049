@@ -14,7 +14,6 @@ public class ProductoService implements IProductoService{
 
     @Override
     public String crearProducto(Producto producto) {
-        producto.setId();
         productos.add(producto);
         return "Producto creado correctamente";
     }

@@ -1,18 +1,22 @@
 package com.TechLab.spring.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
 @Setter
 public class Role {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true, nullable = false)
     private String name;
+
+    @Override
+    public String toString(){  return this.name;  }
+
 
 }

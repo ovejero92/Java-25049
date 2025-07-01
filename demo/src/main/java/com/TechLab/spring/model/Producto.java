@@ -1,14 +1,18 @@
 package com.TechLab.spring.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity
-@AllArgsConstructor
-@Getter
+@Entity @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 @Table(name = "productos")
 public class Producto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String nombre;
     private int precio;
     private String categoria;
