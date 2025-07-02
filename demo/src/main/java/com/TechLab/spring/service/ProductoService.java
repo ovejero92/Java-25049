@@ -1,32 +1,51 @@
 package com.TechLab.spring.service;
+
 import com.TechLab.spring.model.Producto;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProductoService implements IProductoService{
-    // simular un base de datos en memoria
-    private final List<Producto> productos = new ArrayList<>();
-    private Long contadorId = 1L;
+public class ProductoService implements IProductoService {
 
+    private final ProductoRepository repo;
+
+    public ProductoService(ProductoRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
     public String crearProducto(Producto producto) {
-        productos.add(producto);
+        repo.save(producto);
         return "Producto creado correctamente";
     }
 
+    @Override
     public List<Producto> listarProductos() {
-        return productos;
+        return repo.findAll();
     }
 
     @Override
     public Producto buscarPorId(Long id) {
-        if(id >= 0 && id < productos.size()) {
-            return productos.get(id.intValue());
+        return repo.findById(id).orElse(null);
+    }
+
+    @Override
+    public String editarProducto(Long id, Producto producto) {
+        return repo.findById(id).map(p -> {
+            p.setNombre(producto.getNombre());
+            p.setPrecio(producto.getPrecio());
+            repo.save(p);
+            return "Producto actualizado correctamente";
+        }).orElse("Producto no encontrado");
+    }
+
+    @Override
+    public String eliminarProducto(Long id) {
+        if (repo.existsById(id)) {
+            repo.deleteById(id);
+            return "Producto eliminado correctamente";
         }
-        return null;
+        return "Producto no encontrado";
     }
 }

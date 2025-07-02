@@ -16,6 +16,6 @@ public class TechLabSpringApplication {
 		}
 		SpringApplication.run(TechLabSpringApplication.class, args);
 	}
-	
+
 
 }
