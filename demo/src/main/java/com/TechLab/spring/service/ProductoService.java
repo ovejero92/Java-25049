@@ -1,6 +1,7 @@
 package com.TechLab.spring.service;
 
 import com.TechLab.spring.model.Producto;
+import com.TechLab.spring.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,3 +50,4 @@ public class ProductoService implements IProductoService {
         return "Producto no encontrado";
     }
 }
+

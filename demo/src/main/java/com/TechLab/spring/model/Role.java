@@ -7,6 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
+@Getter
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +16,7 @@ public class Role {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Override
-    public String toString(){  return this.name;  }
+
 
 
 }

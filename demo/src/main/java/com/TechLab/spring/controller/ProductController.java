@@ -2,8 +2,6 @@ package com.TechLab.spring.controller;
 import com.TechLab.spring.model.Producto;
 import com.TechLab.spring.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 
 @RestController
@@ -11,6 +9,10 @@ import java.util.List;
 public class ProductController {
 
     private  ProductoService productoService;
+
+    public ProductController(ProductoService productoService) {
+        this.productoService = productoService;
+    }
 
     @GetMapping("/list")
     public List<Producto> listarProductos() {
@@ -27,16 +29,15 @@ public class ProductController {
         return productoService.buscarPorId(id);
     }
 
-    //   /buscar?nombre=mouse
-    @GetMapping("/buscar")
-    public String buscarProducto(@RequestParam String nombre, @RequestParam(required = false, defaultValue = "asc") String orden ) {
-        return "buscando... nombre: " + nombre + " orden: " + orden;
+    @PutMapping("/edit/{id}")
+    public String editarProducto(@PathVariable Long id, @RequestBody Producto producto) {
+        return productoService.editarProducto(id, producto);
     }
 
-
-    // ../find/342 ->
-    // ../find/{id}
-
-
+    @DeleteMapping("/delete/{id}")
+    public String eliminarProducto(@PathVariable Long id) {
+        return productoService.eliminarProducto(id);
+    }
 
 }
+
