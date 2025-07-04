@@ -1,0 +1,6 @@
+.imagen-oferta{
+    width: 100%;
+    height: 100%;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/SITIO-EN-CONSTRUCCION.jpg/960px-SITIO-EN-CONSTRUCCION.jpg");
+    background-size: cover;
+}

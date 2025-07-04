@@ -1,0 +1,94 @@
+/* CSS GENERAL - Clase 3 */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eef;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* HEADER */
+  /* header {
+    background-color: #004080;
+    color: white;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  } */
+  
+  nav ul {
+    list-style-type: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+  }
+  
+  nav li {
+    display: inline;
+    margin-right: 15px;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /* MAIN */
+  main {
+    padding: 2rem;
+    height: 80vh;
+  }
+  
+  /* FORMULARIO */
+  #formulario-contacto {
+    background-color: #fff;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    width: 400px;
+    margin: 0 auto;
+    position: relative;
+    top: 30px;
+    z-index: 9;
+  }
+  
+  #formulario-contacto h2 {
+    margin-top: 0;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #aaa;
+  }
+  
+  input[type="submit"] {
+    background-color: #004080;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #003366;
+  }
+  
+  /* FOOTER */
+  footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 3rem;
+  }
+  

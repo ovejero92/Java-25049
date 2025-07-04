@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Tech - Tienda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="../public/Images/trinidad-y-tobago.png" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/styles/tienda.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- driver.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js/dist/driver.min.css" />
+
+
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky z-10 top-0 w-full">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-gray-800 logo">Tienda Tech</div>
+                <ul class="flex space-x-6 text-gray-600 relative">
+                    <li><a href="../index.html" class="hover:text-gray-800">Inicio</a></li>
+                    <li><a href="#" class="border-b-4 border-indigo-500 pb-[.3rem] hover:text-gray-800">Tienda</a></li>
+                    <li><a href="./ofertas.html" class="hover:text-gray-800">Ofertas</a></li>
+                    <li><a href="./contacto.html" class="hover:text-gray-800  mr-[1.2rem]">Contacto</a></li>
+                    <li class="absolute -right-[2.5rem] -top-[0.7rem] bg-black p-3 rounded-lg">
+                        <button id="abrir-carrito" onclick="abrirCarrito()" class="hover:text-gray-800">
+                            <i class="fa-solid fa-bag-shopping text-white"></i>
+                        </button>
+                        <span id="countCard" class="absolute hidden w-[2rem] h-[2rem] rounded-lg bg-red-800 text-white text-2xl scale-50 flex justify-center -right-4 top-6"></span>
+                    </li>
+                    
+                    <li class="absolute -right-[5.5rem] -top-[0.7rem] bg-black p-3 rounded-lg">
+                        <button id="abrir-carrito" onclick="abrirLogin()" class="hover:text-gray-800">
+                            <i class="fa-solid fa-gear text-white"></i>
+                        </button>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carrito -->
+    <div id="modalCarrito" class="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 hidden z-10">
+        <div class="bg-white w-96 rounded-lg shadow-lg p-6 relative" >
+            
+            <h2 class="text-lg font-bold text-gray-800">Carrito de Compras</h2>
+            <div id="contenidoCarrito" class="mt-4 space-y-4">
+                
+            </div>
+            <p class="mt-4 font-bold">Total: $<span id="totalCarrito">0</span></p>
+            <button onclick="cerrarCarrito()" class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 font-bold p-2 rounded">X</button>
+            <button onclick="BorrarTodoElCarrito()" class="mt-4 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded"><i class="fa-solid fa-trash-can"></i> Borrar Carrito </button>
+            <button onclick="finalizarCompra()" class="mt-4 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded"><i class="fa-regular fa-credit-card"></i> Comprar</button>
+        </div>
+    </div>
+
+    <!-- Categorías
+    <section class="container mx-auto mt-10">
+        <div id="categorias" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
+    </section> -->
+
+    <!-- Productos -->
+    <section class="container mx-auto mt-10">
+        <div id="productos" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-200 py-8 mt-6">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between">
+                <div>
+                    <h4 class="font-bold text-lg ">Tienda Tech</h4>
+                    <p class="mt-2">Tu tienda de confianza para las mejores ofertas.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg">Enlaces útiles</h4>
+                    <ul class="mt-2 space-y-2">
+                        <li><a href="#" class="hover:underline">Política de Privacidad</a></li>
+                        <li><a href="#" class="hover:underline">Términos y Condiciones</a></li>
+                        <li><a href="#" class="hover:underline">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg">Síguenos</h4>
+                    <div class="mt-2 flex space-x-4">
+                        <a href="#"><box-icon name='facebook-square' type='logo' color='#0022d0' ></box-icon></a>
+          <a href="#"><box-icon name='instagram-alt' type='logo' color='#ea0a0e' ></box-icon></a>
+          <a href="#"><box-icon name='twitter' type='logo' color='#0ad5ea' ></box-icon></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<div id="modal_login" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 hidden">
+  <section id="login" class="w-full max-w-sm bg-white p-6 rounded-xl shadow-lg space-y-6 relative">
+    <h2 class="text-xl font-bold text-center text-gray-800">Iniciar sesión como administrador</h2>
+     <button onclick="cerrarLogin()" class="absolute -top-[1.3rem] right-[0.2rem] scale-[0.7] bg-red-500 hover:bg-red-600 font-bold p-2 rounded ">X</button>
+    <div class="space-y-4">
+      <input 
+        type="text" 
+        id="username" 
+        placeholder="Usuario" 
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      
+      <input 
+        type="password" 
+        id="password" 
+        placeholder="Contraseña" 
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      
+      <button 
+        onclick="login()" 
+        class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition duration-200"
+      >
+        Ingresar
+      </button>
+    </div>
+  </section>
+</div>
+
+
+
+
+   <!--  <script src="../assets/js/db/BaseDeDatosHarcodeado.js"></script> -->
+     <script src="../assets/js/db/TechLabDB.js"></script>
+    <script src="https://kit.fontawesome.com/76e20a326e.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+  .logo {
+    font-weight: bold;
+    font-family: "Akaya Kanadaka", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 5px #FF6B6B;
+    color: #EDF6F9; /* Texto claro */
+    animation: pulsoSombra 2s infinite ease-in-out;
+    transition: transform 0.3s ease;
+  }
+  @keyframes pulsoSombra {
+    0%, 100% {
+      text-shadow: 0 0 5px #FF6B6B, 0 0 10px #FF6B6B;
+      transform: scale(1);
+    }
+    50% {
+      text-shadow: 0 0 20px #FF6B6B, 0 0 40px #FF6B6B;
+      transform: scale(1.05);
+    }
+  }
+  .botonMas{
+    position: relative;
+  }

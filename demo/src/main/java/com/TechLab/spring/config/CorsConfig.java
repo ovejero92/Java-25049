@@ -12,7 +12,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // permite todos los endpoints
-                        .allowedOrigins("http://localhost:5500") // permite todos los orígenes
+                        .allowedOrigins("http://localhost:5500","http://127.0.0.1:5500") // permite todos los orígenes
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // métodos permitidos
                         .allowedHeaders("*");
             }

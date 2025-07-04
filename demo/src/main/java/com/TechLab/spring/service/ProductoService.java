@@ -21,6 +21,10 @@ public class ProductoService implements IProductoService {
         return "Producto creado correctamente";
     }
 
+    public List<Producto> crearProductos( List<Producto> productos) {
+        return repo.saveAll(productos);
+    }
+
     @Override
     public List<Producto> listarProductos() {
         return repo.findAll();

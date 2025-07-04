@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda Tech - Contacto</title>
+  <link rel="shortcut icon" href="../public/Images/trinidad-y-tobago.png" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../assets/styles/tienda.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://kit.fontawesome.com/76e20a326e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../assets/styles/contacto.css">
+</head>
+<body>
+  <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky z-10 top-0 w-full">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-gray-800 logo">Tienda Tech</div>
+                <ul class="flex space-x-6 text-gray-600 relative">
+                    <li><a href="../index.html" class="hover:text-gray-800 text-black">Inicio</a></li>
+                    <li><a href="./tienda.html" class=" hover:text-gray-800 text-black">Tienda</a></li>
+                    <li><a href="./ofertas.html" class="hover:text-gray-800 text-black">Ofertas</a></li>
+                    <li><a href="./contacto.html" class="border-b-4 border-indigo-500 pb-[.3rem] hover:text-gray-800 text-black mr-[1.2rem]">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  <main>
+    <section id="formulario-contacto">
+      <h2>Contacto</h2>
+      <p>Podés dejarnos tu mensaje y te responderemos a la brevedad.</p>
+
+      <form action="#" method="post">
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre"><br><br>
+
+        <label for="email">Correo electrónico:</label><br>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="mensaje">Mensaje:</label><br>
+        <textarea id="mensaje" name="mensaje" rows="4" cols="30"></textarea><br><br>
+
+        <input type="submit" value="Enviar">
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mi Sitio Web</p>
+  </footer>
+
+</body>
+</html>

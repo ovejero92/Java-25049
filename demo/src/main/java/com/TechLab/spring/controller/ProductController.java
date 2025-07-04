@@ -24,6 +24,11 @@ public class ProductController {
         return productoService.crearProducto(producto);
     }
 
+    @PostMapping("/batch")
+    public List<Producto> crearProductos(@RequestBody List<Producto> productos ) {
+        return productoService.crearProductos(productos);
+    }
+
     @GetMapping("/find/{id}")
     public Producto buscarProductos(@PathVariable Long id) {
         return productoService.buscarPorId(id);
