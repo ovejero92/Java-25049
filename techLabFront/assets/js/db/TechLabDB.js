@@ -4,38 +4,80 @@ let isAdmin = false;
 window.onload = async () => {
     await fetchProductos();
     verificarLogin();
-    actualizarNavbar();
 };
-// Verifica si el usuario está logueado como admin
-function verificarLogin() {
-    isAdmin = localStorage.getItem("isAdmin") === "true";
+
+// NUEVA FUNCIÓN: Decodifica un token JWT para extraer su contenido (payload)
+function parseJwt(token) {
+    try {
+        return JSON.parse(atob(token.split('.')[1]));
+    } catch (e) {
+        return null;
+    }
 }
 
 
-// LOGIN
+// CAMBIO: verificarLogin ahora lee el token y actualiza el estado de admin
+function verificarLogin() {
+    const token = localStorage.getItem("token");
+    if (token) {
+        const payload = parseJwt(token);
+        // El claim "roles" contiene un array de objetos { authority: "ROLE_..." }
+        if (payload && payload.roles) {
+             isAdmin = payload.roles.some(role => role.authority === 'ROLE_ADMIN');
+        } else {
+             isAdmin = false;
+        }
+    } else {
+        isAdmin = false;
+    }
+    // Después de verificar, volvemos a mostrar los productos para que aparezcan/desaparezcan los botones de admin
+    mostrarProductos(productosGlobal); 
+}
+
+// CAMBIO: La función de login ahora guarda el token y actualiza la UI
 async function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("http://localhost:8080/auth/login", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    });
+    try {
+        const response = await fetch("http://localhost:8080/auth/login", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
 
-    if (response.ok) {
-        const data = await response.json();
-        isAdmin = data.isAdmin;
-        localStorage.setItem("username", data.username);
-        localStorage.setItem("isAdmin", isAdmin);
-        cerrarLogin();
-        await fetchProductos();
-        // TO DELETE ⬇️
-        actualizarNavbar(); // <<---
-        alert("Bienvenido " + data.username);
-    } else {
-        alert("Login fallido");
+        if (response.ok) {
+            const data = await response.json(); // data ahora es { "token": "ey..." }
+            
+            // Guardamos el token en localStorage
+            localStorage.setItem("token", data.token);
+
+            cerrarLogin();
+            
+            // Verificamos el login para actualizar la variable 'isAdmin' y la UI
+            verificarLogin(); 
+            
+            // Usamos el username del token decodificado
+            const payload = parseJwt(data.token);
+            alert("Bienvenido " + payload.sub); // 'sub' es el 'subject', o sea, el username
+
+        } else {
+            // Limpiamos cualquier token viejo si el login falla
+            localStorage.removeItem("token");
+            verificarLogin(); // Actualiza la UI para ocultar botones de admin
+            alert("Login fallido: Credenciales inválidas");
+        }
+    } catch(error) {
+        console.error("Error en el login:", error);
+        alert("Ocurrió un error al intentar conectar con el servidor.");
     }
+}
+
+// AÑADIR: Una función de logout es una buena práctica
+function logout() {
+    localStorage.removeItem("token");
+    verificarLogin(); // Esto pondrá isAdmin en false y re-renderizará los productos
+    alert("Sesión cerrada");
 }
 
 async function fetchProductos() {
@@ -221,19 +263,29 @@ async function eliminarProducto(id) {
     const confirmacion = confirm("¿Estás seguro que querés eliminar este producto?");
     if (!confirmacion) return;
 
+    // Obtenemos el token guardado
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("No estás autenticado. Por favor, inicia sesión.");
+        return;
+    }
+
     const response = await fetch(`http://localhost:8080/producto/delete/${id}`, {
         method: 'DELETE',
-         headers: {
-        "Authorization": "Bearer " + localStorage.getItem("token"),
-        "Content-Type": "application/json"
-    }
+        headers: {
+            // ¡Esta es la parte clave! Enviamos el token con el prefijo "Bearer "
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
+        }
     });
 
     if (response.ok) {
         alert("Producto eliminado");
-        await fetchProductos();
+        await fetchProductos(); // Recargamos la lista de productos
     } else {
-        alert("Error al eliminar producto");
+        const errorData = await response.text();
+        console.error("Error:", errorData);
+        alert("Error al eliminar producto. Puede que tu sesión haya expirado.");
     }
 }
 
@@ -241,5 +293,3 @@ async function eliminarProducto(id) {
 function editarProducto(id) {
     alert("Funcionalidad de edición pendiente para el producto ID: " + id);
 }
-
-
